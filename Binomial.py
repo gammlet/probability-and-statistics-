@@ -35,9 +35,13 @@ for key in sorted(result.keys()):
 # Verify probabilities sum to 1
 print(f"\nSum of probabilities: {sum(result.values()):.2f}")
 
-#x = 0.5 + np.arange(len(sorted(result.keys())))
-plt.figure(figsize=(2, 2))
-plt.bar(result.keys(), result.values(), width=1, edgecolor="white", linewidth=0.7)
+x = np.arange(len(result))
+y = result.values()
+plt.figure(figsize=(5, 5))
+plt.bar(x, y, width=1, edgecolor="white", linewidth=0.7)
 plt.ylabel("Probability")
 plt.xlabel("Price")
+plt.xticks(x, result.keys())
+plt.yticks(np.arange(0, 0.2, step=0.015))
+
 plt.show()
