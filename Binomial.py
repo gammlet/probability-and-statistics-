@@ -1,47 +1,65 @@
 from collections import defaultdict
 import matplotlib.pyplot as plt
 import numpy as np
-p = 0.25
-q = 1 - p
-def calculate_probabilities(initial_state, steps):
 
-    current_probs = initial_state.copy()
+
+def calculate_probabilities(start, steps, p, q):
+
+    current = {start: 1.0}
     
     for step in range(steps):
-        next_probs = defaultdict(float)
-        
-        for value, prob in current_probs.items():
-            # These are the possible changes and their probabilities
-            # Adjust these according to your specific scenario
-            #next_probs[value * 1.01] += prob * p  # real case(have bugs ig)
-            #next_probs[value * 0.99] += prob * q  # real case(have bugs ig)
-            next_probs[value + 1] += prob * p  # demo
-            next_probs[value - 1] += prob * q  # demo
+        next_step = defaultdict(float)
+        for value, prob in current.items():
+            next_step[value + 1] += prob * p  # demo
+            next_step[value - 1] += prob * q  # demo
             
-        current_probs = dict(next_probs)
+        current = next_step
     
-    return current_probs
+    return current
 
-# Example usage:
+# Parametrs
+p = 0.9
+q = 1 - p
+start_value = 100 
 initial_state = {101: p, 99: q}
-steps = 25
+steps = 500
 
-result = calculate_probabilities(initial_state, steps)
 
-# Print the results sorted by value
-for key in sorted(result.keys()):
-    print(f"${key:.2f}: {result[key]:.4f}")
+result = calculate_probabilities(start_value, steps, p, q)
 
-# Verify probabilities sum to 1
-print(f"\nSum of probabilities: {sum(result.values()):.2f}")
+## Print the results sorted by value
+#for key in sorted(result.keys()):
+#    print(f"${key:.2f}: {result[key]:.4f}")
+#
+## Verify probabilities sum to 1
+#print(f"\nSum of probabilities: {sum(result.values()):.2f}")
+
+#mean / standart deviation / varience
+change = p*(1) + q*(-1)
+mean = start_value + steps * abs(change)
+print(f"Mean is {mean:.2f}")
+
+values = sorted(result.keys())
+probabilities = [result[v] for v in values]
 
 x = np.arange(len(result))
 y = result.values()
-plt.figure(figsize=(5, 5))
-plt.bar(x, y, width=1, edgecolor="white", linewidth=0.7)
+
+plt.figure(figsize=(14, 5))
+#plt.bar(x, y, width=1, edgecolor="white", linewidth=0.7)
+bars = plt.bar(values, probabilities, width=0.8)
+
+plt.axvline(mean, color='red', linestyle='--', label=f'Theoretical Mean: {mean:.1f}')
 plt.ylabel("Probability")
 plt.xlabel("Price")
-plt.xticks(x, result.keys())
-plt.yticks(np.arange(0, 0.2, step=0.015))
+
+xticks = range(min(values), max(values)+1, 20)
+plt.xticks(xticks, rotation=45)
+
+
 
 plt.show()
+
+
+
+
