@@ -24,7 +24,7 @@ start_value = 100
 initial_state = {101: p, 99: q}
 steps = 500
 
-
+#gay ahh shi t 
 result = calculate_probabilities(start_value, steps, p, q)
 
 ## Print the results sorted by value
