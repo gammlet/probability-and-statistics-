@@ -11,9 +11,12 @@ def calculate_probabilities(initial_state, steps):
         next_probs = defaultdict(float)
         
         for value, prob in current_probs.items():
-            
-            next_probs[value * 1.01] += prob * p  
-            next_probs[value * 0.99] += prob * q  
+            # These are the possible changes and their probabilities
+            # Adjust these according to your specific scenario
+            #next_probs[value * 1.01] += prob * p  # real case(have bugs ig)
+            #next_probs[value * 0.99] += prob * q  # real case(have bugs ig)
+            next_probs[value + 1] += prob * p  # demo
+            next_probs[value - 1] += prob * q  # demo
             
         current_probs = dict(next_probs)
     
