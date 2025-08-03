@@ -19,10 +19,10 @@ for i in range(n):
     V_list.append(path[1])
 
     # I ahd an scale problem found solution with deepseek
-    plt.quiver(x_pos, y_pos, U_list[i], V_list[i], color = "k", angles='xy', scale_units='xy', scale=1, width=0.002, linestyle='--')
+    plt.quiver(x_pos, y_pos, path[0], path[1], color = "k", angles='xy', scale_units='xy', scale=1, width=0.002, linestyle='--')
 
-    x_pos = x_pos + U_list[i]
-    y_pos = y_pos + V_list[i]
+    x_pos = x_pos + path[0]
+    y_pos = y_pos + path[1]
 
 
 
