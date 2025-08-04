@@ -1,14 +1,14 @@
 import random
 import matplotlib.pyplot as plt
-import numpy as np
+#import numpy as np
 
 path = [1, -1]
 steps = 1000
 start_value = 100 
 values = []
-p = 0.5
-q = 1 - p
-probs = [p, q]
+#p = 0.5
+#q = 1 - p
+#probs = [p, q]
 
 for step in range(steps):
     values.append(start_value)
@@ -18,9 +18,7 @@ for step in range(steps):
 
 time = [i for i in range(len(values))]
 
-
-
-eq_x = [0, steps]
+eq_x = [0, steps-1]
 eq_y = [100, values[-1]]
 
 plt.figure(figsize=(14, 5))
