@@ -24,10 +24,7 @@ spaced_eq_y =  np.linspace(100, values[-1], len(values))
 
 
 def calc_diff():
-    diff_list = []
-    for i in range(len(spaced_eq_y)):
-        difference = spaced_eq_y[i] - values[i]
-        diff_list.append(difference)
+    diff_list = np.array(spaced_eq_y) - np.array(values)
     return diff_list 
 
 def show_plot():
